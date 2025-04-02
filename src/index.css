@@ -1,0 +1,229 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black ;
+    border-radius: 4rem;
+    background-color: #FFDEE9;
+    background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+
+}
+.logo-container{
+  padding: 0;
+}
+.logo{
+    width: 150px;  
+    margin: 0;
+    padding: 0;
+}
+.nav-items > ul {
+  display: flex;
+  list-style-type: none;
+  font-size: 16px;
+
+
+}
+.nav-items > ul > li{
+   padding: 20px;
+   margin: 10px;
+
+}
+.res-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* align-items: center; */
+  
+}
+.res-card{
+    width: 200px ;
+   border-radius: 1.5rem;
+    margin: 5px;
+   
+    padding: 5px;
+    transition: transform 0.3s ease-in-out box-shadow 0.3s ease-in-out;
+    background-image: radial-gradient( circle farthest-corner at 3.7% 49.8%,  rgba(143,232,255,1) 21.9%, rgba(209,243,251,1) 52.9% ); 
+}
+.res-card:hover{
+  border: 1px solid black;
+  transform: scale(1.1); /* 1.2 means 20% bigger */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Soft shadow */
+  cursor: pointer;
+}
+.search{
+  padding: 10px;
+}
+
+.res-logo{
+  width: 190px;
+  border-radius: 1.5rem;
+ 
+}
+.filter {
+  display: flex;
+  /* justify-content: space-evenly; This will push the buttons to opposite sides */
+  
+  margin: 20px 0;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.filter-btn{
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 3rem;
+    
+
+}
+
+.filter-btn {background-image: linear-gradient(to right, #1D2B64 0%, #F8CDDA  51%, #1D2B64  100%)}
+.filter-btn {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+ }
+
+ .filter-btn:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+ /* .reset-btn{
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 3rem;
+  display: flex;
+  justify-content: space-between;
+    
+
+}
+
+.reset-btn {background-image: linear-gradient(to right, #1D2B64 0%, #F8CDDA  51%, #1D2B64  100%)}
+.reset-btn {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+ }
+
+ .reset-btn:hover {
+   background-position: right center; /* change the direction of the change here */
+   /* color: #fff; */
+   /* text-decoration: none; */
+ 
+.shimmer-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.shimmer-card{
+  margin: 20px;
+  width: 200px;
+  height: 400px;
+  background-color: #f0f0f0;
+}
+
+.login-btn {background-image: linear-gradient(to right, #70e1f5 0%, #ffd194  51%, #70e1f5  100%)}
+.login-btn {
+   margin: 18px;
+   padding: 20px 35px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+   height: 2rem;
+   width: 2rem;
+
+   
+   
+   
+ }
+ 
+
+ .login-btn:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+ 
+ .login-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+ .filter{
+  display: flex;
+ }
+
+ 
+ .search-btn {background-image: linear-gradient(to right, #0B486B 0%, #F56217  51%, #0B486B  100%)}
+ .search-btn {
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .search-btn:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+  .search{
+    display: flex;
+  }
+
+  .adj{
+    display: flex;
+    justify-content:space-evenly;
+    
+  }
+
+  .search-box {
+    width: 100%;
+    max-width: 350px;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: rgb(220, 172, 172);
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    outline: none;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  
+  .search-box::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .search-box:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+  
+ 
+ 
+
+ 
