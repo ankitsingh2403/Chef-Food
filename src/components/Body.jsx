@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   // State to manage restaurant list
@@ -43,6 +44,7 @@ const Body = () => {
 
     setListOfRestaurants(uniqueRestaurants);
     setFilteredRestaurant(uniqueRestaurants);
+    console.log(uniqueRestaurants);
   };
 
   if (listOfRestaurants.length === 0) {
@@ -51,6 +53,7 @@ const Body = () => {
 
   return (
     <div className="body">
+      <h1>Top Restaurants In Kanpur</h1>
       <div className="filter">
         <div className="filter">
           <div className="adj">
@@ -104,7 +107,7 @@ const Body = () => {
 
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+         <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}> <RestaurantCard  resData={restaurant} /> </Link>
         ))}
       </div>
     </div>
