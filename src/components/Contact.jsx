@@ -11,7 +11,7 @@ const Contact = () => {
           <p>Have a question or feedback? Reach out to us!</p>
         </div>
         <img
-          src="\src\assets\contact pic.jpg" 
+          src="\src\assets\contact pic.jpg"
           alt="Food Order Support"
           className="contact-image"
         />
@@ -25,7 +25,7 @@ const Contact = () => {
           <p>Interested in our service? Call our sales team.</p>
           <span className="contact-number">+91 9601675408</span>
         </div>
-        
+
         <div className="contact-card">
           <FaHeadset className="contact-icon" />
           <h3>Customer Support</h3>

@@ -16,13 +16,22 @@ const About = () => {
         className="about-carousel"
       >
         <div>
-          <img src="\src\assets\food_facebook_cover_31.jpg" alt="Delicious Food" />
+          <img
+            src="\src\assets\food_facebook_cover_31.jpg"
+            alt="Delicious Food"
+          />
         </div>
         <div>
-          <img src="\src\assets\food_web_banner_36.jpg" alt="Professional Chef" />
+          <img
+            src="\src\assets\food_web_banner_36.jpg"
+            alt="Professional Chef"
+          />
         </div>
         <div>
-          <img src="\src\assets\Food-Facebook-Cover-Banner-19.jpg" alt="Restaurant Ambience" />
+          <img
+            src="\src\assets\Food-Facebook-Cover-Banner-19.jpg"
+            alt="Restaurant Ambience"
+          />
         </div>
       </Carousel>
 
@@ -33,20 +42,21 @@ const About = () => {
         </h1>
         <p className="about-text">
           Welcome to <strong>Chef Food</strong> – your ultimate destination for
-          delicious meals delivered with passion and precision. Whether you're craving
-          mouth-watering biryanis, crispy burgers, or gourmet continental dishes, we've
-          got something that will tickle every taste bud.
+          delicious meals delivered with passion and precision. Whether you're
+          craving mouth-watering biryanis, crispy burgers, or gourmet
+          continental dishes, we've got something that will tickle every taste
+          bud.
         </p>
         <p className="about-text">
           At Chef Food, we believe that food is not just a necessity – it's an
-          experience. That's why we partner with the best chefs and local kitchens to
-          bring you hand-crafted meals made with fresh ingredients and a whole lot of
-          love.
+          experience. That's why we partner with the best chefs and local
+          kitchens to bring you hand-crafted meals made with fresh ingredients
+          and a whole lot of love.
         </p>
         <p className="about-text">
-          Our mission is simple – to make high-quality food accessible, fast, and
-          unforgettable. Whether you're dining solo, with friends, or hosting a party,
-          we're here to serve flavor on your table.
+          Our mission is simple – to make high-quality food accessible, fast,
+          and unforgettable. Whether you're dining solo, with friends, or
+          hosting a party, we're here to serve flavor on your table.
         </p>
       </div>
 

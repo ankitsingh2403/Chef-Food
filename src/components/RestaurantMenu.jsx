@@ -2,27 +2,31 @@ import React, { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { MENU_API } from "../utils/constants";
 import { useParams } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
+  // const [resInfo, setResInfo] = useState(null);
 
   const {resId} = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  const resInfo = useRestaurantMenu(resId);   //custom hook
+  
+  //This Logic is written in custom hook as utility functiion
+  // useEffect(() => {
+  //   fetchMenu();
+  // }, []);
 
-  const fetchMenu = async () => {
-    try {
-      const response = await fetch(MENU_API + resId);
-      const json = await response.json();
-      console.log(json);
-      setResInfo(json?.data || null);
-    } catch (error) {
-      console.error("Error fetching menu:", error);
-    }
-  };
+  // const fetchMenu = async () => {
+  //   try {
+  //     const response = await fetch(MENU_API + resId);
+  //     const json = await response.json();
+  //     console.log(json);
+  //     setResInfo(json?.data || null);
+  //   } catch (error) {
+  //     console.error("Error fetching menu:", error);
+  //   }
+  // };
 
   if (!resInfo) return <Shimmer />;
 
@@ -49,8 +53,8 @@ const RestaurantMenu = () => {
       <h2 className="restaurant-details">{cuisines?.join(", ")} - {costForTwoMessage}</h2>
 
       <div className="menu-items">
-        {menuItems?.map((dish) => (
-          <div className="menu-card" key={dish.id}>
+        {menuItems?.map((dish,index) => (
+          <div className="menu-card" key={`${dish.id}-${index}`}>
             <div className="menu-info">
               <h3>{dish.name}</h3>
               <p className="menu-description">{dish.description}</p>

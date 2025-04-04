@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // State to manage restaurant list
@@ -23,7 +24,9 @@ const Body = () => {
     const json = await data.json();
 
     const restaurants = json?.data?.cards
-      ?.map((card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+      ?.map(
+        (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      )
       ?.filter(Boolean)
       ?.flat();
 
@@ -41,6 +44,12 @@ const Body = () => {
     setFilteredRestaurant(uniqueRestaurants);
     console.log(uniqueRestaurants);
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if(onlineStatus === false){
+    return <h1>Looks Like You are Offline ! Please check Your Internet </h1>
+  }
 
   if (listOfRestaurants.length === 0) {
     return <Shimmer />;
@@ -65,13 +74,19 @@ const Body = () => {
           <img src="\src\assets\food_web_banner_36.jpg" alt="Fine Dining" />
         </div>
         <div>
-          <img src="\src\assets\Food-Facebook-Cover-Banner-05.jpg" alt="Top Chefs" />
+          <img
+            src="\src\assets\Food-Facebook-Cover-Banner-05.jpg"
+            alt="Top Chefs"
+          />
         </div>
         <div>
           <img src="\src\assets\food_facebook_cover_31.jpg" alt="Top Chef1" />
         </div>
         <div>
-          <img src="\src\assets\Food-Facebook-Cover-Banner-05.jpg" alt="Top Chef2" />
+          <img
+            src="\src\assets\Food-Facebook-Cover-Banner-05.jpg"
+            alt="Top Chef2"
+          />
         </div>
         <div>
           <img src="\src\assets\6220339.jpg" alt="Top Chef2" />
@@ -99,7 +114,9 @@ const Body = () => {
                 className="search-btn"
                 onClick={() => {
                   const filteredRestaurant = listOfRestaurants.filter((res) =>
-                    res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                    res.info.name
+                      .toLowerCase()
+                      .includes(searchText.toLowerCase())
                   );
                   setFilteredRestaurant(filteredRestaurant);
                 }}
@@ -124,7 +141,10 @@ const Body = () => {
 
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-          <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
+          >
             <RestaurantCard resData={restaurant} />
           </Link>
         ))}
