@@ -2,13 +2,13 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 
 const Body = () => {
   // State to manage restaurant list
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
-
-  const [filteredRestaurant,setFilteredRestaurant] = useState([]);
-
+  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
@@ -22,17 +22,12 @@ const Body = () => {
 
     const json = await data.json();
 
-    // console.log(json);
-    // setListOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
     const restaurants = json?.data?.cards
-      ?.map(
-        (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
-      )
-      ?.filter(Boolean) // Remove undefined/null values
-      ?.flat(); // Flatten the array to get all restaurants in one list
+      ?.map((card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+      ?.filter(Boolean)
+      ?.flat();
 
-    const uniqueRestaurants = []; //Extra code written to get Unique restaurants it iterates and check if restaurant id is not seen than it add it in
-    // set and the push it in uniquerestaurant array then it updates usestate
+    const uniqueRestaurants = [];
     const seenIds = new Set();
 
     restaurants.forEach((restaurant) => {
@@ -53,7 +48,41 @@ const Body = () => {
 
   return (
     <div className="body">
+      {/* 🏆 Carousel Section */}
+      <Carousel
+        showThumbs={false}
+        autoPlay
+        infiniteLoop
+        interval={3000}
+        showStatus={false}
+        showArrows={false}
+        className="carousel"
+      >
+        <div>
+          <img src="\src\assets\7967011.jpg" alt="Delicious Food" />
+        </div>
+        <div>
+          <img src="\src\assets\food_web_banner_36.jpg" alt="Fine Dining" />
+        </div>
+        <div>
+          <img src="\src\assets\Food-Facebook-Cover-Banner-05.jpg" alt="Top Chefs" />
+        </div>
+        <div>
+          <img src="\src\assets\food_facebook_cover_31.jpg" alt="Top Chef1" />
+        </div>
+        <div>
+          <img src="\src\assets\Food-Facebook-Cover-Banner-05.jpg" alt="Top Chef2" />
+        </div>
+        <div>
+          <img src="\src\assets\6220339.jpg" alt="Top Chef2" />
+        </div>
+        <div>
+          <img src="\src\assets\7460859.jpg" alt="Top Chef2" />
+        </div>
+      </Carousel>
+
       <h1>Top Restaurants In Kanpur</h1>
+
       <div className="filter">
         <div className="filter">
           <div className="adj">
@@ -69,13 +98,8 @@ const Body = () => {
               <button
                 className="search-btn"
                 onClick={() => {
-                  //filter the restaurant cards and update the UI
-                  //Search text
-
                   const filteredRestaurant = listOfRestaurants.filter((res) =>
-                    res.info.name
-                      .toLowerCase()
-                      .includes(searchText.toLowerCase())
+                    res.info.name.toLowerCase().includes(searchText.toLowerCase())
                   );
                   setFilteredRestaurant(filteredRestaurant);
                 }}
@@ -95,19 +119,14 @@ const Body = () => {
               Top Rated Restaurants ⭐
             </button>
           </div>
-
-          {/* <button
-            className="reset-btn"
-            onClick={() => setListOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [])}
-          >
-            Reset 🔄
-          </button> */}
         </div>
       </div>
 
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-         <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}> <RestaurantCard  resData={restaurant} /> </Link>
+          <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
