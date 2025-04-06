@@ -3,6 +3,9 @@ import Shimmer from "./Shimmer";
 import { MENU_API } from "../utils/constants";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import { addItem } from "../utils/cartSlice";
+import { useDispatch } from "react-redux";
+
 
 
 const RestaurantMenu = () => {
@@ -11,6 +14,17 @@ const RestaurantMenu = () => {
   const {resId} = useParams();
 
   const resInfo = useRestaurantMenu(resId);   //custom hook
+
+  const dispatch = useDispatch();
+
+
+  // const addFoodItem = (dish) => {
+      
+  // }
+
+  // const handleAddItem= () => {
+  //     dispatch(addItem("Grapes"));
+  // }
   
   //This Logic is written in custom hook as utility functiion
   // useEffect(() => {
@@ -62,7 +76,7 @@ const RestaurantMenu = () => {
               {dish.ratings && (
                 <p className="menu-rating">⭐ {dish.ratings.aggregatedRating.rating} ({dish.ratings.aggregatedRating.ratingCount} ratings)</p>
               )}
-              <button className="add-btn">ADD</button>
+              <button className="add-btn" onClick={()=>dispatch(addItem(dish))} >ADD</button>
             </div>
             {dish.imageId && (
               <img

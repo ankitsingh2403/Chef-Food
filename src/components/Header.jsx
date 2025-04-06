@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FaCartArrowDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnNameReact, setBtnNameReact] = useState("Login");
@@ -11,6 +12,9 @@ const Header = () => {
   //if dependancy array is there => useEffect is called at initial render(just Once)
   //if dependaancy array is [btnnamereact] => called everytime btnnameReact is updated
   useEffect(() => {}, []);
+
+  const cartItems= useSelector(store => store.cart.items);
+  console.log(cartItems);
 
   return (
     <div className="header">
@@ -32,7 +36,8 @@ const Header = () => {
           </Link>
           <Link to="/cart">
             <li className="cart-icon">
-              <FaCartArrowDown />
+              <FaCartArrowDown/>
+              <span className="cart-count">{cartItems.length}</span>
             </li>
           </Link>
           <button

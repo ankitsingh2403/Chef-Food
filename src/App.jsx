@@ -9,18 +9,23 @@ import Contact from './components/Contact';
 import Error from './components/Error';
 import Cart from './components/Cart';
 import RestaurantMenu from './components/RestaurantMenu';
+import {Provider} from "react-redux";
+import store from './utils/store';
 
 
 
 
 function App() {
   return (
-    <div className="app">
+    <Provider store={store}>
+       <div className="app">
       
       <Header/>
       <Outlet/>
 
     </div>
+    </Provider>
+   
   )
 };
 

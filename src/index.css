@@ -587,6 +587,279 @@ background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
     }
   }
 
+  /* Cart CSS */
+
+  .cart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+    /* background-color: #fdfdfd; */
+    flex-wrap: nowrap;
+    gap: 2rem;
+  }
+  
+  .cart-left {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .cart-step {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .cart-step input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .cart-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .btn-outline {
+    background-color: #fff;
+    border: 1px solid #ff6600;
+    color: #ff6600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .btn-primary {background-image: linear-gradient(to right, #fe8c00 0%, #f83600  51%, #fe8c00  100%)}
+  
+  .btn-primary {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.5s;
+    background-size: 200% auto;
+    box-shadow: 0 0 20px #eee;
+  }
+  .btn-primary:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .cart-right {
+    width: 400px;
+    position: sticky;
+    top: 100px; /* Keeps it fixed while scrolling */
+    align-self: flex-start;
+    background-color: #FBDA61;
+    background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+    
+
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: relative;
+  }
+  
+  .cart-items {
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .bill-details {
+    margin-top: 1.5rem;
+  }
+  
+  .bill-details p {
+    margin: 0.25rem 0;
+  }
+  
+  
+  .btn-order {background-image: linear-gradient(to right, #fe8c00 0%, #f83600  51%, #fe8c00  100%)}
+  .btn-order {
+     margin: 10px;
+     padding: 15px 45px;
+     text-align: center;
+     text-transform: uppercase;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     box-shadow: 0 0 20px #eee;
+     border-radius: 10px;
+     display: inline
+   }
+
+   .btn-order:hover {
+     background-position: right center; /* change the direction of the change here */
+     color: #fff;
+     text-decoration: none;
+   }
+  
+
+  .step-section {
+    background-color: #A9C9FF;
+    background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+    
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    border-left: 5px solid #fc8019;
+  }
+  
+  .step-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .address-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    resize: vertical;
+    font-family: inherit;
+    background-color: #fafafa;
+  }
+  
+  .address-textarea:focus {
+    border-color: #fc8019;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(252, 128, 25, 0.2);
+  }
+  
+  .address-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .save-btn {background-image: linear-gradient(to right, #fe8c00 0%, #f83600  51%, #fe8c00  100%)}
+  .check-btn {background-image: linear-gradient(to right, #fe8c00 0%, #f83600  51%, #fe8c00  100%)}
+  
+  .save-btn,
+  .check-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    /* transition: all 0.3s ease; */
+    transition: 0.5s;
+    background-size: 200% auto;
+    box-shadow: 0 0 20px #eee;
+  }
+  
+
+  
+  .save-btn:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+  .check-btn:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .check-btn {
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  .check-btn:hover {
+    background-color: #e0e0e0;
+  }
+
+
+  .payment-btn {background-image: linear-gradient(to right, #fe8c00 0%, #f83600  51%, #fe8c00  100%)}
+  .payment-btn {
+     margin: 10px;
+     padding: 15px 45px;
+     text-align: center;
+     text-transform: uppercase;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     box-shadow: 0 0 20px #eee;
+     border-radius: 10px;
+     display: block;
+     display: inline;
+   }
+
+   .payment-btn:hover {
+     background-position: right center; /* change the direction of the change here */
+     color: #fff;
+     text-decoration: none;
+   }
+  
+  .remove-btn {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 10px;
+    transition: 0.3s ease;
+  }
+  
+  .remove-btn:hover {
+    background-color: #cc0000;
+  }
+
+  .clear-btn {
+    background-color: #f44336; /* Red shade */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .clear-btn:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+  }
+  .clear-btn-container {
+    display: flex;
+    justify-content:flex-end;
+  }
+  
+  
+  
+  
+  
+  
+
   
   
   
