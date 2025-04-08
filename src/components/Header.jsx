@@ -40,6 +40,7 @@ const Header = () => {
               <span className="cart-count">{cartItems.length}</span>
             </li>
           </Link>
+          <Link to="/login">
           <button
             className="login-btn"
             onClick={() => {
@@ -50,6 +51,7 @@ const Header = () => {
           >
             {btnNameReact}
           </button>
+          </Link>
         </ul>
       </div>
     </div>

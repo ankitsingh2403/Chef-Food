@@ -11,6 +11,8 @@ import Cart from './components/Cart';
 import RestaurantMenu from './components/RestaurantMenu';
 import {Provider} from "react-redux";
 import store from './utils/store';
+import Login from './components/Login';
+import Register from './components/Register';
 
 
 
@@ -55,6 +57,14 @@ export const appRouter=createBrowserRouter([
         path: "/restaurants/:resId",
         element:<RestaurantMenu/>,
       },
+      {
+        path: "/login",
+        element:<Login/>,
+      },
+      {
+        path: "/register",
+        element:<Register/>,
+      },
       
     ],
     errorElement:<Error/>
@@ -74,6 +84,14 @@ export const appRouter=createBrowserRouter([
   {
     path: "/restaurants/:resId",
     element:<RestaurantMenu/>,
+  },
+  {
+    path: "/login",
+    element:<Login/>,
+  },
+  {
+    path: "/register",
+    element:<Register/>,
   },
   
 

@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem, clearCart } from "../utils/cartSlice"; // adjust path if needed
+import { Link } from "react-router-dom";
+
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -19,8 +21,8 @@ const Cart = () => {
             To place your order, log in to your existing account or sign up.
           </p>
           <div className="cart-buttons">
-            <button className="btn-outline">Log In</button>
-            <button className="btn-primary">Sign Up</button>
+            <Link to="/login"><button className="btn-outline">Log In</button></Link>
+            <Link to="/register"><button className="btn-primary" >Sign Up</button></Link>
           </div>
         </div>
 
