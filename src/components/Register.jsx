@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 
@@ -7,6 +8,32 @@ const Register = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+
+  const handleRegister = async () => {
+    try {
+      const res = await fetch("http://localhost:4000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, email })
+      });
+  
+      const data = await res.json();
+  
+      if (res.ok) {
+        toast.success(" Registered Successfully!");
+        //clear form
+        setName("");
+        setEmail("");
+        setPhone("");
+      } else {
+        toast.error(data.message || "Registration failed");
+      }
+  
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
 
   return (
     <div className="signup-container">
@@ -43,7 +70,7 @@ const Register = () => {
           />
         </div>
 
-        <button className="signup-btn">Register</button>
+        <button className="signup-btn"onClick={handleRegister}>Register</button>
       </div>
     </div>
   );

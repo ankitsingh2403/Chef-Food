@@ -1,23 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaPhone, FaHeadset, FaEnvelope } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Contact = () => {
+  // 👇 Manage form input state
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+
+  // 👇 Form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent page reload
+
+    try {
+      const res = await fetch("http://localhost:4000/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, email, message }),
+      });
+
+      const data = await res.json(); 
+
+      if (res.ok) {
+        toast.success("Message Sent Successfully");
+        // Clear form
+        setName("");
+        setEmail("");
+        setPhone("");
+        setMessage("");
+      } else {
+        toast.error(data.message || "Message failed to send");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <div className="contact-page">
-      {/* Banner Section */}
+    
       <div className="contact-banner">
         <div className="contact-text">
           <h1>Get in touch with Chef Food</h1>
           <p>Have a question or feedback? Reach out to us!</p>
         </div>
         <img
-          src="\src\assets\contact pic.jpg"
+          src="/src/assets/contact pic.jpg"
           alt="Food Order Support"
           className="contact-image"
         />
       </div>
 
-      {/* Contact Options */}
+      
       <div className="contact-options">
         <div className="contact-card">
           <FaPhone className="contact-icon" />
@@ -44,12 +80,36 @@ const Contact = () => {
       {/* Enquiry Form */}
       <div className="contact-form">
         <h2>Send Us an Enquiry</h2>
-        <form>
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <input type="text" placeholder="Your Phone" required />
-          <textarea placeholder="Your Message" rows="4" required></textarea>
-          <button type="submit">Submit</button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Your Phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+          <textarea
+            placeholder="Your Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows="4"
+            required
+          ></textarea>
+          <button type="submit" onClick={handleSubmit}>Submit</button>
         </form>
       </div>
     </div>

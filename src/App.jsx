@@ -13,6 +13,8 @@ import {Provider} from "react-redux";
 import store from './utils/store';
 import Login from './components/Login';
 import Register from './components/Register';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -24,6 +26,8 @@ function App() {
       
       <Header/>
       <Outlet/>
+      <ToastContainer />
+
 
     </div>
     </Provider>
