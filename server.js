@@ -1,46 +1,70 @@
-const express=require("express");
-const dotenv=require("dotenv")
-const app=express();
-const cors =require("cors");
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
-
+const app = express();
 dotenv.config();
-const PORT =process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(cors({
-    origin:process.env.FRONTEND_URL,
-    methods:["GET","POST","PUT","DELETE"],
-    credentials:true,
-}))
+// CORS configuration
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
-//middleware to parse json request body
+// Middleware to parse JSON
 app.use(express.json());
+app.use(cookieParser());
 
+// Session middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "fallback_secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      sameSite: "lax", // for cross-site cookies
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    },
+  })
+);
+
+// Root route
 app.get("/", (req, res) => {
-    res.send("API is running");
-  });
-
-const registerRoutes = require("./routes/register");
-const enquiryROutes = require("./routes/enquiry")
-app.use("/api", registerRoutes);
-app.use("/api",enquiryROutes);
-
-
-app.listen(PORT,()=>{
-        console.log(`Server is Running at ${PORT}`);
+  res.send("API is running");
 });
 
-const dbConnect=require("./config/database")
+// Route imports
+const registerRoutes = require("./routes/register");
+const enquiryRoutes = require("./routes/enquiry");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const addressRoutes = require("./routes/address");
+const paymentRoutes = require("./routes/paymentRoutes");
+
+// Mount routes
+app.use("/api", registerRoutes);
+app.use("/api", enquiryRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/address", addressRoutes);
+app.use("/api/payment", paymentRoutes);
+
+// Error handler middleware
+const errorMiddleware = require("./middleware/errorMiddleware");
+app.use(errorMiddleware);
+
+// Database connection and server start
+const dbConnect = require("./config/database");
 dbConnect();
 
-const errorMiddleware = require("./middleware/errorMiddleware");
-app.use(errorMiddleware); // note:Always use this at bottom
-
-
-
-
-
-
-
-
-
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
+});

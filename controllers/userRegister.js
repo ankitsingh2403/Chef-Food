@@ -1,4 +1,5 @@
 const UserRegister = require("../models/user");
+const Profile = require("../models/profile"); // ✅ Import Profile model
 const nodemailer = require("nodemailer");
 
 exports.Registration = async (req, res, next) => {
@@ -7,12 +8,8 @@ exports.Registration = async (req, res, next) => {
     if (!name || !phone || !email) {
       return next(new Error("Please Fill Full form", 400));
     }
-    // Simple regex for basic email format validation
-    // Checks that the email contains: some chars + "@" + some chars + "." + some chars
-    const emailRegex = /\S+@\S+\.\S+/;
 
-    // Simple regex for 10-digit phone number validation
-    // Ensures only digits and exactly 10 characters
+    const emailRegex = /\S+@\S+\.\S+/;
     const phoneRegex = /^\d{10}$/;
 
     if (!emailRegex.test(email)) {
@@ -27,8 +24,14 @@ exports.Registration = async (req, res, next) => {
     if (existingUser) {
       return next(new Error("User Already Registered", 400));
     }
+
+    //  Step 1: Create user in UserRegister
     const response = await UserRegister.create({ name, phone, email });
 
+    //  Step 2: Also create user in Profile
+    await Profile.create({ name, phone, email });
+
+    //  Step 3: Send welcome email
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
@@ -54,8 +57,8 @@ exports.Registration = async (req, res, next) => {
         `,
     };
 
-    // Send email
     await transporter.sendMail(mailOptions);
+
     res.status(200).json({
       status: true,
       data: response,
