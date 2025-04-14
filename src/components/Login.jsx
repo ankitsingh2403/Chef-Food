@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -7,11 +7,13 @@ const Login = () => {
   const [phone, setPhone] = useState("");
   const [userOtp, setUserOtp] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
-  // Check if the user is already logged in (on page load)
+  // This effect will run only once when the page is first loaded
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn")) {
+    // Check the login state only once during page load
+    const loginState = localStorage.getItem("isLoggedIn");
+    if (loginState === "true") {
       setIsLoggedIn(true);
       navigate("/profile"); // Redirect to profile page if logged in
     }
