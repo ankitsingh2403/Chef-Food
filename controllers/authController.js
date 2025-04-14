@@ -1,6 +1,6 @@
 const twilio = require("twilio");
 const generateOTP = require('../utils/generateOTP');
-const Profile = require("../models/profile"); // Import Profile model
+const Profile = require("../models/profile");
 
 const client = twilio(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
 
@@ -11,16 +11,19 @@ exports.sendOtp = async (req, res) => {
 
   const otp = generateOTP();
 
+  // Save OTP in session
   req.session.otp = otp;
   req.session.phone = phone;
 
   console.log("Sending OTP to phone:", phone);
+  console.log("OTP stored in session:", otp);
+  console.log("Session:", req.session);
 
   try {
     await client.messages.create({
       body: `Your OTP for Chef Food is: ${otp}`,
       from: process.env.TWILIO_PHONE,
-      to: phone.startsWith("+") ? phone : `+91${phone}`, // Assuming India format
+      to: phone.startsWith("+") ? phone : `+91${phone}`,
     });
 
     res.status(200).json({ message: "OTP Sent Successfully" });
@@ -34,6 +37,7 @@ exports.sendOtp = async (req, res) => {
 exports.verifyOtp = async (req, res) => {
   const { otp } = req.body;
 
+  console.log("Session in verify:", req.session);
   console.log("Session OTP:", req.session.otp);
   console.log("User Entered OTP:", otp);
 
@@ -41,20 +45,18 @@ exports.verifyOtp = async (req, res) => {
     try {
       const phone = req.session.phone;
 
-      // Find user by phone
       let user = await Profile.findOne({ phone });
 
       if (!user) {
-        // Optionally, auto-create a user if not exists (you can skip this if you don't want this behavior)
         user = await Profile.create({
-          name: "Guest User", // placeholder or change logic if needed
-          email: `${phone}@example.com`, // placeholder or collect during signup
+          name: "Guest User",
+          email: `${phone}@example.com`,
           phone,
-          password: "OTP_LOGIN", // placeholder if passwordless
+          password: "OTP_LOGIN",
         });
       }
 
-      req.session.user = { _id: user._id }; // Enable session-based tracking
+      req.session.user = { _id: user._id };
       req.session.isLoggedIn = true;
 
       res.status(200).json({ message: "OTP Verified Successfully" });

@@ -8,33 +8,31 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
-// CORS configuration
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
-
-// Middleware to parse JSON
-app.use(express.json());
+// --- Step 1: Cookie Parser (before sessions)
 app.use(cookieParser());
 
-// Session middleware
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "fallback_secret",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: process.env.NODE_ENV === "production",
-      httpOnly: true,
-      sameSite: "lax", // for cross-site cookies
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    },
-  })
-);
+// --- Step 2: CORS (must match frontend + include credentials)
+app.use(cors({
+  origin: process.env.FRONTEND_URL, // e.g., http://localhost:5173
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
+
+// --- Step 3: Session Middleware
+app.use(session({
+  secret: process.env.SESSION_SECRET || "fallback_secret",
+  resave: false,
+  saveUninitialized: false,  // Important to avoid empty sessions
+  cookie: {
+    secure: false,            // Set true if using HTTPS
+    httpOnly: true,
+    sameSite: "lax",          // "lax" or "none" if on cross-origin and using HTTPS
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  },
+}));
+
+// --- Step 4: Body Parser (after session)
+app.use(express.json());
 
 // Root route
 app.get("/", (req, res) => {
@@ -57,11 +55,11 @@ app.use("/api/user", userRoutes);
 app.use("/api/address", addressRoutes);
 app.use("/api/payment", paymentRoutes);
 
-// Error handler middleware
+// Error middleware
 const errorMiddleware = require("./middleware/errorMiddleware");
 app.use(errorMiddleware);
 
-// Database connection and server start
+// DB connect and start server
 const dbConnect = require("./config/database");
 dbConnect();
 
