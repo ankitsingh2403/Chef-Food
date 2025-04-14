@@ -20,7 +20,7 @@ const Register = () => {
       const data = await res.json();
   
       if (res.ok) {
-        toast.success(" Registered Successfully!");
+        toast.success("Registration Successful")
         //clear form
         setName("");
         setEmail("");

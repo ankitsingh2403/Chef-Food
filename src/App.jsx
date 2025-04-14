@@ -15,22 +15,30 @@ import Login from './components/Login';
 import Register from './components/Register';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Profile from './components/Profile';
+import PaymentSuccess from './components/paymentSuccess';
+
+
+
 
 
 
 
 function App() {
   return (
-    <Provider store={store}>
+    
+      <Provider store={store}>
        <div className="app">
       
       <Header/>
       <Outlet/>
-      <ToastContainer />
+      <ToastContainer autoClose={3000} hideProgressBar={false} newestOnTop={true}/>
 
 
     </div>
     </Provider>
+   
+    
    
   )
 };
@@ -69,6 +77,15 @@ export const appRouter=createBrowserRouter([
         path: "/register",
         element:<Register/>,
       },
+      {
+        path: "/profile",
+        element:<Profile/>,
+      },
+      {
+        path: "/success",
+        element:<PaymentSuccess/>,
+      },
+     
       
     ],
     errorElement:<Error/>
@@ -97,6 +114,15 @@ export const appRouter=createBrowserRouter([
     path: "/register",
     element:<Register/>,
   },
+  {
+    path: "/profile",
+    element:<Profile/>,
+  },
+  {
+    path: "/success",
+    element:<PaymentSuccess/>,
+  },
+
   
 
 
