@@ -27,8 +27,8 @@ const Login = () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/send-otp`, {
         method: "POST",
+        credentials: 'include',
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({ phone }),
       });
 
@@ -51,11 +51,11 @@ const Login = () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/verify-otp`, {
         method: "POST",
+        credentials: 'include', // Include session cookies
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ otp: userOtp }),
-        credentials: "include", // Include session cookies
+        body: JSON.stringify({ otp }),
       });
 
       const data = await res.json();
