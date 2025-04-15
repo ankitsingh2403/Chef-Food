@@ -9,7 +9,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/user/profile", {
+        const res = await fetch(`${process.env.BACKEND_URL}/api/user/profile`, {
           credentials: "include",
         });
         const data = await res.json();
@@ -37,7 +37,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/user/logout", {
+      const res = await fetch(`${process.env.BACKEND_URL}/api/user/logout`, {
         method: "POST",
         credentials: "include",
       });
