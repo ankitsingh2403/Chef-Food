@@ -18,6 +18,8 @@ exports.sendOtp = async (req, res) => {
   console.log("Sending OTP to phone:", phone);
   console.log("OTP stored in session:", otp);
   console.log("Session:", req.session);
+  console.log('Session ID during sendOTP:', req.sessionID);
+
 
   try {
     await client.messages.create({
@@ -41,6 +43,8 @@ exports.verifyOtp = async (req, res) => {
   console.log("Session in verify:", req.session);
   console.log("Session OTP:", req.session.otp);
   console.log("User Entered OTP:", otp);
+  console.log('Session ID during verifyOTP:', req.sessionID);
+
 
   if (otp === req.session.otp) {
     try {
