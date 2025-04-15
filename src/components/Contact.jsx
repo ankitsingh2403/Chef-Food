@@ -14,7 +14,7 @@ const Contact = () => {
     e.preventDefault(); // Prevent page reload
 
     try {
-      const res = await fetch(`${process.env.BACKEND_URL}/api/enquiry`, {
+      const res = await fetch(`${process.env.VITE_BACKEND_URL}/api/enquiry`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, email, message }),

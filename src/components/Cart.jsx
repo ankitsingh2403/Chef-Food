@@ -33,7 +33,7 @@ const Cart = () => {
 
   const saveAddress = async () => {
     try {
-      const res = await fetch(`${process.env.BACKEND_URL}/api/address`, {
+      const res = await fetch(`${process.env.VITE_BACKEND_URL}/api/address`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -64,7 +64,7 @@ const Cart = () => {
 
   const fetchAddresses = async () => {
     try {
-      const res = await fetch(`${process.env.BACKEND_URL}/api/address`, {
+      const res = await fetch(`${process.env.VITE_BACKEND_URL}/api/address`, {
         credentials: "include",
       });
 
@@ -83,7 +83,7 @@ const Cart = () => {
 
   const deleteAddress = async (addressId) => {
     try {
-      const res = await fetch(`${process.env.BACKEND_URL}/api/address/${addressId}`, {
+      const res = await fetch(`${process.env.VITE_BACKEND_URL}/api/address/${addressId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -108,7 +108,7 @@ const Cart = () => {
     }
   
     try {
-      const res = await fetch(`${process.env.BACKEND_URL}/api/payment/create-checkout-session`, {
+      const res = await fetch(`${process.env.VITE_BACKEND_URL}/api/payment/create-checkout-session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
