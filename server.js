@@ -30,27 +30,17 @@ app.use(cors({
 //     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 //   },
 // }));
-const sessionOptions = {
-  secret: process.env.SESSION_SECRET || "fallback_secret",  // Set a fallback secret if not in .env
+app.use(session({
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
+    secure: process.env.NODE_ENV === "production", // true on Render
     httpOnly: true,
-    sameSite: "lax",  // This is a good default
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // "none" for cross-site
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   },
-};
-
-// Check if the environment is production
-if (process.env.NODE_ENV === "production") {
-  // Production settings
-  sessionOptions.cookie.secure = true; // Only set secure cookies in production (requires HTTPS)
-} else {
-  // Development settings
-  sessionOptions.cookie.secure = false;  // Set secure cookies to false in development (HTTP only)
-}
-
-app.use(session(sessionOptions));
+}));
 
 // --- Step 4: Body Parser (after session)
 app.use(express.json());
