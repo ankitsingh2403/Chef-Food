@@ -25,7 +25,7 @@ const Login = () => {
     if (!phone) return toast.error("Enter your phone number!");
 
     try {
-      const res = await fetch(`${process.env.VITE_BACKEND_URL}/api/auth/send-otp`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -49,7 +49,7 @@ const Login = () => {
     if (!userOtp) return toast.error("Enter the OTP!");
 
     try {
-      const res = await fetch(`${process.env.VITE_BACKEND_URL}/api/auth/verify-otp`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/verify-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const Login = () => {
   // Logout
   const handleLogout = async () => {
     try {
-      const res = await fetch(`${process.env.VITE_BACKEND_URL}/api/auth/logout`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });
