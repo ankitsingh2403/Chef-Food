@@ -19,17 +19,38 @@ app.use(cors({
 }));
 
 // --- Step 3: Session Middleware
-app.use(session({
-  secret: process.env.SESSION_SECRET || "fallback_secret",
+// app.use(session({
+//   secret: process.env.SESSION_SECRET || "fallback_secret",
+//   resave: false,
+//   saveUninitialized: false,  // Important to avoid empty sessions
+//   cookie: {
+//     secure: false,            // Set true if using HTTPS
+//     httpOnly: true,
+//     sameSite: "lax",          // "lax" or "none" if on cross-origin and using HTTPS
+//     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+//   },
+// }));
+const sessionOptions = {
+  secret: process.env.SESSION_SECRET || "fallback_secret",  // Set a fallback secret if not in .env
   resave: false,
-  saveUninitialized: false,  // Important to avoid empty sessions
+  saveUninitialized: false,
   cookie: {
-    secure: false,            // Set true if using HTTPS
     httpOnly: true,
-    sameSite: "lax",          // "lax" or "none" if on cross-origin and using HTTPS
+    sameSite: "lax",  // This is a good default
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   },
-}));
+};
+
+// Check if the environment is production
+if (process.env.NODE_ENV === "production") {
+  // Production settings
+  sessionOptions.cookie.secure = true; // Only set secure cookies in production (requires HTTPS)
+} else {
+  // Development settings
+  sessionOptions.cookie.secure = false;  // Set secure cookies to false in development (HTTP only)
+}
+
+app.use(session(sessionOptions));
 
 // --- Step 4: Body Parser (after session)
 app.use(express.json());
