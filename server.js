@@ -14,13 +14,6 @@ app.set('trust proxy', 1);
 // --- Step 1: Cookie Parser (before sessions)
 app.use(cookieParser());
 
-// --- Step 2: CORS (must match frontend + include credentials)
-app.use(cors({
-  origin: process.env.FRONTEND_URL, // e.g., http://localhost:5173
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-}));
-
 // --- Step 3: Session Middleware
 // app.use(session({
 //   secret: process.env.SESSION_SECRET || "fallback_secret",
@@ -44,6 +37,14 @@ app.use(session({
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   },
 }));
+
+// --- Step 2: CORS (must match frontend + include credentials)
+app.use(cors({
+  origin: process.env.FRONTEND_URL, // e.g., http://localhost:5173
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
+
 
 // --- Step 4: Body Parser (after session)
 app.use(express.json());
