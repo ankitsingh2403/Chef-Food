@@ -1,6 +1,9 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import img3 from "../assets/img3.jpg"
+import img8 from "../assets/img8.jpg"
+import img10 from "../assets/img10.jpg"
 
 const About = () => {
   return (
@@ -17,19 +20,19 @@ const About = () => {
       >
         <div>
           <img
-            src="\src\assets\food_facebook_cover_31.jpg"
+            src={img3}
             alt="Delicious Food"
           />
         </div>
         <div>
           <img
-            src="\src\assets\food_web_banner_36.jpg"
+            src={img8}
             alt="Professional Chef"
           />
         </div>
         <div>
           <img
-            src="\src\assets\Food-Facebook-Cover-Banner-19.jpg"
+            src={img10}
             alt="Restaurant Ambience"
           />
         </div>

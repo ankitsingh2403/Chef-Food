@@ -5,6 +5,13 @@ import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import useOnlineStatus from "../utils/useOnlineStatus";
+import img4 from "../assets/img4.jpg"
+import img6 from "../assets/img6.jpg"
+import img7 from "../assets/img7.jpg"
+import img10 from "../assets/img10.jpg"
+import img2 from "../assets/img2.jpg"
+import img11 from "../assets/img11.jpg"
+import img1 from "../assets/img1.jpg"
 
 const Body = () => {
   // State to manage restaurant list
@@ -68,31 +75,31 @@ const Body = () => {
         className="carousel"
       >
         <div>
-          <img src="\src\assets\7967011.jpg" alt="Delicious Food" />
+          <img src={img4} alt="Delicious Food" />
         </div>
         <div>
-          <img src="\src\assets\food_web_banner_36.jpg" alt="Fine Dining" />
+          <img src={img6} alt="Fine Dining" />
         </div>
         <div>
           <img
-            src="\src\assets\Food-Facebook-Cover-Banner-05.jpg"
+            src={img7}
             alt="Top Chefs"
           />
         </div>
         <div>
-          <img src="\src\assets\food_facebook_cover_31.jpg" alt="Top Chef1" />
+          <img src={img10} alt="Top Chef1" />
         </div>
         <div>
           <img
-            src="\src\assets\Food-Facebook-Cover-Banner-05.jpg"
+            src={img2}
             alt="Top Chef2"
           />
         </div>
         <div>
-          <img src="\src\assets\6220339.jpg" alt="Top Chef2" />
+          <img src={img11} alt="Top Chef2" />
         </div>
         <div>
-          <img src="\src\assets\7460859.jpg" alt="Top Chef2" />
+          <img src={img1} alt="Top Chef2" />
         </div>
       </Carousel>
 
