@@ -35,6 +35,7 @@ exports.sendOtp = async (req, res) => {
 
 // Verify OTP
 exports.verifyOtp = async (req, res) => {
+  console.log("Verifying OTP")
   const { otp } = req.body;
 
   console.log("Session in verify:", req.session);

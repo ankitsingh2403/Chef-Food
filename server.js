@@ -8,6 +8,9 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
+app.set('trust proxy', 1);
+
+
 // --- Step 1: Cookie Parser (before sessions)
 app.use(cookieParser());
 
