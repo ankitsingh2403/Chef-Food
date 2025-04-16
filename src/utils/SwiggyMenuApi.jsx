@@ -1,7 +1,7 @@
 const SwiggyMenuApi = async (restaurantId, lat, lng) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/menuRoute?restaurantId=${restaurantId}&lat=${lat}&lng=${lng}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/swiggy-menu?restaurantId=${restaurantId}&lat=${lat}&lng=${lng}`
       );
   
       if (!response.ok) {
