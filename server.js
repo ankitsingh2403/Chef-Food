@@ -63,6 +63,7 @@ const userRoutes = require("./routes/userRoutes");
 const addressRoutes = require("./routes/address");
 const paymentRoutes = require("./routes/paymentRoutes");
 const swiggyRoutes = require("./routes/swiggy");
+const menuRoutes =require("./routes/menuRoutes")
 
 // Mount routes
 app.use("/api", registerRoutes);
@@ -72,6 +73,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/address", addressRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api", swiggyRoutes);
+app.use('/api', menuRoutes);
 
 // Error middleware
 const errorMiddleware = require("./middleware/errorMiddleware");
