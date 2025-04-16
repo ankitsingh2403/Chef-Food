@@ -2,7 +2,7 @@ export const fetchSwiggyRestaurants = async (lat, lng) => {
     try {
       // Construct the URL with dynamic lat and lng values
       const response = await fetch(
-        `https://chef-food-1-vqlr.onrender.com/api/swiggy-restaurants?lat=${lat}&lng=${lng}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/swiggy-restaurants?lat=${lat}&lng=${lng}`
       );
   
       // Check if the response status is OK
