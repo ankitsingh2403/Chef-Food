@@ -37,7 +37,7 @@ const Body = () => {
   const fetchData = async (lat, lng) => {
     try {
       const response = await fetch(
-        `https://chef-food-1-vqlr.onrender.com/api/swiggy-restaurants?lat=${lat}&lng=${lng}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/swiggy-restaurants?lat=${lat}&lng=${lng}`
       );
       const json = await response.json();
 

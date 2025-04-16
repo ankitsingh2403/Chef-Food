@@ -46,7 +46,7 @@ const RestaurantMenu = () => {
   const fetchMenu = async (latitude, longitude) => {
     try {
       const response = await fetch(
-        `https://chef-food-1-vqlr.onrender.com/api/swiggy-restaurants?lat=${latitude}&lng=${longitude}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/swiggy-restaurants?lat=${latitude}&lng=${longitude}`
       );
       const json = await response.json();
       console.log(json);
