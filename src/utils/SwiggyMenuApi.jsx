@@ -9,7 +9,7 @@ const SwiggyMenuApi = async (restaurantId, lat, lng) => {
       }
   
       const data = await response.json();
-      return data; // Return the JSON response
+      return data.menu; // Return only the menu part
     } catch (error) {
       console.error("Error fetching from SwiggyMenuApi:", error.message);
       throw new Error("Failed to fetch data from Swiggy");
