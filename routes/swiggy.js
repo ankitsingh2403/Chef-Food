@@ -19,10 +19,19 @@ router.get("/swiggy-restaurants", async (req, res) => {
         page_type: "DESKTOP_WEB_LISTING",
       },
       headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/113 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/113 Safari/537.36",
       },
     });
+
+    // Check if the response status is 200
+    if (response.status !== 200) {
+      console.log(`Received non-200 status: ${response.status}`);
+      console.log("Response body:", response.data);
+      return res.status(500).json({ error: "Failed to fetch Swiggy data", details: response.data });
+    }
+
+    // Log the successful response data for debugging
+    console.log("Swiggy API Response:", response.data);
 
     // Check if data exists and handle empty responses
     if (!response.data || !response.data?.data?.cards) {
