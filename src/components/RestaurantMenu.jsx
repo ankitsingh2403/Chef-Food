@@ -6,41 +6,55 @@ import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { addItem } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
 
-
-
 const RestaurantMenu = () => {
-  // const [resInfo, setResInfo] = useState(null);
-
-  const {resId} = useParams();
-
-  const resInfo = useRestaurantMenu(resId);   //custom hook
-
+  const { resId } = useParams();
+  const resInfo = useRestaurantMenu(resId);  // custom hook
   const dispatch = useDispatch();
 
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
 
-  // const addFoodItem = (dish) => {
-      
-  // }
+  useEffect(() => {
+    // Get user geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLat(position.coords.latitude);
+          setLng(position.coords.longitude);
+        },
+        (error) => {
+          console.warn("Geolocation denied, using fallback coords.");
+          // Fallback to Kanpur coordinates
+          setLat(26.449923);
+          setLng(80.3318736);
+        }
+      );
+    } else {
+      // Fallback if geolocation is not supported
+      setLat(26.449923);
+      setLng(80.3318736);
+    }
+  }, []);
 
-  // const handleAddItem= () => {
-  //     dispatch(addItem("Grapes"));
-  // }
-  
-  //This Logic is written in custom hook as utility functiion
-  // useEffect(() => {
-  //   fetchMenu();
-  // }, []);
+  // Fetching menu data if latitude and longitude are available
+  useEffect(() => {
+    if (lat && lng) {
+      fetchMenu(lat, lng);
+    }
+  }, [lat, lng]);
 
-  // const fetchMenu = async () => {
-  //   try {
-  //     const response = await fetch(MENU_API + resId);
-  //     const json = await response.json();
-  //     console.log(json);
-  //     setResInfo(json?.data || null);
-  //   } catch (error) {
-  //     console.error("Error fetching menu:", error);
-  //   }
-  // };
+  const fetchMenu = async (latitude, longitude) => {
+    try {
+      const response = await fetch(
+        `https://chef-food-1-vqlr.onrender.com/api/swiggy-restaurants?lat=${latitude}&lng=${longitude}`
+      );
+      const json = await response.json();
+      console.log(json);
+      // Handle your response data as needed
+    } catch (error) {
+      console.error("Error fetching menu:", error);
+    }
+  };
 
   if (!resInfo) return <Shimmer />;
 
@@ -67,16 +81,18 @@ const RestaurantMenu = () => {
       <h2 className="restaurant-details">{cuisines?.join(", ")} - {costForTwoMessage}</h2>
 
       <div className="menu-items">
-        {menuItems?.map((dish,index) => (
+        {menuItems?.map((dish, index) => (
           <div className="menu-card" key={`${dish.id}-${index}`}>
             <div className="menu-info">
               <h3>{dish.name}</h3>
               <p className="menu-description">{dish.description}</p>
               <h4 className="menu-price">₹{dish.price ? dish.price / 100 : "N/A"}</h4>
               {dish.ratings && (
-                <p className="menu-rating">⭐ {dish.ratings.aggregatedRating.rating} ({dish.ratings.aggregatedRating.ratingCount} ratings)</p>
+                <p className="menu-rating">
+                  ⭐ {dish.ratings.aggregatedRating.rating} ({dish.ratings.aggregatedRating.ratingCount} ratings)
+                </p>
               )}
-              <button className="add-btn" onClick={()=>dispatch(addItem(dish))} >ADD</button>
+              <button className="add-btn" onClick={() => dispatch(addItem(dish))}>ADD</button>
             </div>
             {dish.imageId && (
               <img
