@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
-import Shimmer from "./Shimmer";
-import { MENU_API } from "../utils/constants";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useRestaurantMenu from "../utils/useRestaurantMenu";
-import { addItem } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
+import Shimmer from "./Shimmer";
+import SwiggyMenuApi from "../utils/SwiggyMenuApi"; // Import SwiggyMenuApi utility
 
 const RestaurantMenu = () => {
-  const { resId } = useParams();
-  const resInfo = useRestaurantMenu(resId);  // custom hook
-  const dispatch = useDispatch();
+  const { resId } = useParams(); // Extract restaurant ID from URL params
+  const dispatch = useDispatch(); // Get dispatch function from Redux
 
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
+  const [menuData, setMenuData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Get user geolocation
@@ -24,42 +25,42 @@ const RestaurantMenu = () => {
         },
         (error) => {
           console.warn("Geolocation denied, using fallback coords.");
-          // Fallback to Kanpur coordinates
-          setLat(26.449923);
+          setLat(26.449923); // Fallback to Kanpur coordinates
           setLng(80.3318736);
         }
       );
     } else {
-      // Fallback if geolocation is not supported
-      setLat(26.449923);
+      setLat(26.449923); // Fallback if geolocation is not supported
       setLng(80.3318736);
     }
   }, []);
 
-  // Fetching menu data if latitude and longitude are available
   useEffect(() => {
+    // Fetch the menu data once lat and lng are available
     if (lat && lng) {
-      fetchMenu(lat, lng);
+      const fetchMenu = async () => {
+        try {
+          const data = await SwiggyMenuApi(resId, lat, lng); // Call the SwiggyMenuApi
+          setMenuData(data); // Store the menu data in the state
+        } catch (err) {
+          setError(err.message); // Handle errors
+        } finally {
+          setLoading(false); // Stop loading after the request
+        }
+      };
+
+      fetchMenu();
     }
-  }, [lat, lng]);
+  }, [lat, lng, resId]);
 
-  const fetchMenu = async (latitude, longitude) => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/swiggy-restaurants?lat=${latitude}&lng=${longitude}`
-      );
-      const json = await response.json();
-      console.log(json);
-      // Handle your response data as needed
-    } catch (error) {
-      console.error("Error fetching menu:", error);
-    }
-  };
+  // If loading, show a shimmer effect
+  if (loading) return <Shimmer />;
+  
+  // If there's an error, show the error message
+  if (error) return <h1>Error: {error}</h1>;
 
-  if (!resInfo) return <Shimmer />;
-
-  // Extract restaurant details safely
-  const restaurantCard = resInfo?.cards?.find(
+  // Extract restaurant details safely from the data
+  const restaurantCard = menuData?.cards?.find(
     (card) => card?.card?.card?.info
   );
 
@@ -68,9 +69,9 @@ const RestaurantMenu = () => {
   const { name, cuisines, costForTwoMessage } = restaurantCard.card.card.info;
 
   // Extract menu categories
-  const menuCategories = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+  const menuCategories = menuData?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
 
-  // Extract all menu items
+  // Extract all menu items from categories
   const menuItems = menuCategories?.flatMap(category =>
     category?.card?.card?.itemCards?.map(item => item.card.info) || []
   );
