@@ -63,7 +63,7 @@ const userRoutes = require("./routes/userRoutes");
 const addressRoutes = require("./routes/address");
 const paymentRoutes = require("./routes/paymentRoutes");
 const swiggyRoutes = require("./routes/swiggy");
-const menuRoutes =require("./routes/menuRoutes")
+const menuRoutes = require('./routes/menuRoutes');
 
 // Mount routes
 app.use("/api", registerRoutes);
