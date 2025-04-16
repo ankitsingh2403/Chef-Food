@@ -55,7 +55,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ otp }),
+        body: JSON.stringify({ otpotp: userOtp }),
       });
 
       const data = await res.json();
