@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import img3 from "../assets/img3.jpg"
 import img8 from "../assets/img8.jpg"
 import img10 from "../assets/img10.jpg"
-import img12 from "../assets/img12.svg"
+import img13 from "../assets/img13.svg"
 
 const About = () => {
   return (
@@ -72,7 +72,7 @@ const About = () => {
           className="about-img-left"
         />
         <img
-          src={img12}
+          src={img13}
           alt="Person cooking"
           className="about-img-right"
         />
