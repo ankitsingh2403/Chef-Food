@@ -1174,6 +1174,186 @@ background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
   }
 }
 
+/* Responsiveness */
+/* Responsive Styles */
+
+/* Extra Small Devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    width: 120px;
+  }
+
+  .nav-items {
+    margin-right: 0;
+    margin-top: 10px;
+  }
+
+  .nav-items > ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .res-container {
+    justify-content: center;
+  }
+
+  .res-card {
+    width: 90%;
+  }
+
+  .menu-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .menu-image {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+
+  .filter {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact-text, .contact-image {
+    max-width: 100%;
+  }
+
+  .contact-options {
+    flex-direction: column;
+  }
+
+  .profile-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cart-container {
+    flex-direction: column;
+  }
+
+  .signup-box, .login-box {
+    padding: 1.5rem;
+  }
+
+  .success-card {
+    padding: 1.5rem;
+  }
+}
+
+/* Medium Devices (tablets, 768px to 991px) */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-items > ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .filter {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .res-card {
+    width: 45%;
+  }
+
+  .cart-container {
+    flex-direction: column;
+  }
+
+  .menu-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .menu-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .profile-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-options {
+    flex-direction: column;
+  }
+
+  .contact-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .signup-box, .login-box {
+    padding: 2rem;
+  }
+
+  .success-card {
+    padding: 2rem;
+  }
+}
+
+/* Large Devices (desktops, 992px and above) */
+@media (min-width: 992px) {
+  .res-card {
+    width: 200px;
+  }
+
+  .menu-card {
+    flex-direction: row;
+  }
+
+  .menu-image {
+    width: 100px;
+  }
+
+  .nav-items > ul {
+    flex-direction: row;
+  }
+
+  .filter {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .contact-options {
+    flex-direction: row;
+  }
+
+  .cart-container {
+    flex-direction: row;
+  }
+
+  .profile-wrapper {
+    flex-direction: row;
+  }
+}
+
+
 
 
 
