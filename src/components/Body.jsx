@@ -97,7 +97,7 @@ const Body = () => {
         <div><img src={img1} alt="Top Chef2" /></div>
       </Carousel>
 
-      <h1>Top Restaurants In Kanpur</h1>
+      <h1>Top Restaurants In Your Area</h1>
 
       <div className="filter">
         <div className="adj">
