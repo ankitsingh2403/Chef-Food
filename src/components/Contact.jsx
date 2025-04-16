@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaPhone, FaHeadset, FaEnvelope } from "react-icons/fa";
 import { toast } from "react-toastify";
+import img5 from "../assets/img5.jpg"
 
 const Contact = () => {
   // 👇 Manage form input state
@@ -8,6 +9,7 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+
 
   // 👇 Form submission
   const handleSubmit = async (e) => {
@@ -47,7 +49,7 @@ const Contact = () => {
           <p>Have a question or feedback? Reach out to us!</p>
         </div>
         <img
-          src="/src/assets/contact pic.jpg"
+          src={img5}
           alt="Food Order Support"
           className="contact-image"
         />
