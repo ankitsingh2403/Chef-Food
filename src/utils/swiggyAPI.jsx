@@ -10,17 +10,25 @@ export const fetchSwiggyRestaurants = async (lat, lng) => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
   
+      // Check if the response is in JSON format
+      const contentType = response.headers.get('Content-Type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const rawResponse = await response.text(); // Get raw response if it's not JSON
+        throw new Error('Expected JSON response, but received HTML or another format: ' + rawResponse);
+      }
+  
       // Parse the JSON response
       const data = await response.json();
   
       // Check if the response contains the expected data
-      if (!data || !data.restaurants) {
-        throw new Error('Invalid data structure');
+      if (!data || !Array.isArray(data.restaurants) || data.restaurants.length === 0) {
+        throw new Error('Invalid or empty restaurant data');
       }
   
       return data.restaurants; // Return the restaurant data
     } catch (error) {
-      console.error("Error fetching from Swiggy proxy API:", error.message);
+      // Enhanced error logging for more context
+      console.error("Error fetching from Swiggy proxy API:", error);
       return null; // Return null or an empty array based on your needs
     }
   };
